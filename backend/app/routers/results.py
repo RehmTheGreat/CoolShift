@@ -122,6 +122,6 @@ def get_comparison(scenario_id: str, run_id: str | None = None, db: Session = De
     return {
         "scenario_id": scenario_id,
         "run_id": run_id,
-        "summary": opt_summary,
+        "summary": OutputSummarySchema.model_validate(opt_summary),
         "timeline": merged_timeline,
     }

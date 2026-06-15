@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 from pydantic import BaseModel, Field
+from datetime import datetime
+
 
 
 # ===================================================================
@@ -150,8 +152,8 @@ class OutputSummarySchema(BaseModel):
 
     scenario_id: str
     run_id: str
-    period_start: str
-    period_end: str
+    period_start: datetime | str
+    period_end: datetime | str
     baseline_energy_kwh: float = 0.0
     optimized_energy_kwh: float = 0.0
     energy_saving_kwh: float = 0.0

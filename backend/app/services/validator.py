@@ -105,14 +105,17 @@ def validate_scenario_data(scenario_id: str, db: Session) -> Dict[str, Any]:
         # Time continuity check
         parsed_times = []
         for ts in timestamps:
-            try:
-                # Handle potential formats
-                if "T" in ts:
-                    parsed_times.append(datetime.fromisoformat(ts))
-                else:
-                    parsed_times.append(datetime.strptime(ts, "%Y-%m-%d %H:%M:%S"))
-            except ValueError:
-                errors.append(f"Invalid timestamp format: '{ts}'. Must be ISO 8601.")
+            if isinstance(ts, datetime):
+                parsed_times.append(ts)
+            else:
+                try:
+                    ts_str = str(ts).strip()
+                    if "T" in ts_str:
+                        parsed_times.append(datetime.fromisoformat(ts_str))
+                    else:
+                        parsed_times.append(datetime.strptime(ts_str, "%Y-%m-%d %H:%M:%S"))
+                except ValueError:
+                    errors.append(f"Invalid timestamp format: '{ts}'. Must be ISO 8601.")
                 
         if len(parsed_times) == num_intervals and num_intervals > 1:
             gaps = 0
