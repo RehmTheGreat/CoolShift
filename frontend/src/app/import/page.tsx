@@ -55,16 +55,16 @@ export default function ImportPage() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Upload card */}
-        <Card className="glass-card border-white/[0.06] flex flex-col justify-between">
+        <Card className="glass-card flex flex-col justify-between">
           <CardHeader>
-            <CardTitle className="text-lg font-bold text-white">Spreadsheet Upload Terminal</CardTitle>
+            <CardTitle className="text-lg font-bold text-foreground">Spreadsheet Upload Terminal</CardTitle>
             <CardDescription className="text-xs">
               Upload the organizer public workbook (.xlsx) to load scenarios, appliances, and time-series records.
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6 pb-6">
             {/* Drag & Drop mockup container */}
-            <div className="border border-dashed border-white/[0.08] rounded-xl p-8 text-center bg-white/[0.01] hover:bg-white/[0.02] transition-all relative">
+            <div className="border border-dashed border-border rounded-xl p-8 text-center bg-muted/5 hover:bg-muted/10 transition-all relative">
               <input
                 type="file"
                 accept=".xlsx, .xls"
@@ -72,33 +72,33 @@ export default function ImportPage() {
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                 disabled={uploading}
               />
-              <Upload className="w-10 h-10 text-slate-500 mx-auto mb-3" />
-              <p className="text-sm text-slate-300 font-medium">
+              <Upload className="w-10 h-10 text-muted-foreground mx-auto mb-3" />
+              <p className="text-sm text-foreground font-medium">
                 {file ? file.name : "Select or drag Excel workbook"}
               </p>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="text-xs text-muted-foreground mt-1">
                 {file ? `${(file.size / 1024).toFixed(0)} KB` : "Supports .xlsx, .xls templates"}
               </p>
             </div>
 
             {errorMsg && (
-              <div className="p-3 rounded-lg border border-rose-500/20 bg-rose-500/10 text-xs text-rose-400 flex items-center gap-2">
+              <div className="p-3 rounded-lg border border-rose-500/20 bg-rose-500/10 text-xs text-rose-600 dark:text-rose-400 flex items-center gap-2">
                 <AlertOctagon className="w-4 h-4 shrink-0" />
                 <span>{errorMsg}</span>
               </div>
             )}
 
             {importSummary && (
-              <div className="p-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-xs text-emerald-400 space-y-2">
+              <div className="p-4 rounded-lg border border-emerald-500/20 bg-emerald-500/10 text-xs text-emerald-600 dark:text-emerald-400 space-y-2">
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="w-4 h-4 shrink-0" />
                   <span className="font-semibold">Import Complete: {importSummary.scenario_id}</span>
                 </div>
-                <div className="grid grid-cols-2 gap-2 text-slate-300 font-mono mt-2">
+                <div className="grid grid-cols-2 gap-2 text-foreground font-mono mt-2">
                   {Object.entries(importSummary.rows_imported).map(([key, val]) => (
-                    <div key={key} className="flex justify-between border-b border-white/[0.04] pb-1">
+                    <div key={key} className="flex justify-between border-b border-border pb-1">
                       <span>{key.replace("_", " ")}:</span>
-                      <span className="font-bold text-white">{val} rows</span>
+                      <span className="font-bold text-foreground">{val} rows</span>
                     </div>
                   ))}
                 </div>
@@ -108,7 +108,7 @@ export default function ImportPage() {
             <Button
               onClick={handleUpload}
               disabled={!file || uploading}
-              className="w-full gradient-bg text-[#0a0e1a] font-bold flex items-center justify-center gap-2"
+              className="w-full gradient-bg text-primary-foreground font-bold flex items-center justify-center gap-2"
             >
               {uploading ? (
                 <>
@@ -124,34 +124,34 @@ export default function ImportPage() {
         </Card>
 
         {/* Validation report card */}
-        <Card className="glass-card border-white/[0.06] flex flex-col">
-          <CardHeader className="border-b border-white/[0.04]">
-            <CardTitle className="text-lg font-bold text-white">Real-Time Validation Dashboard</CardTitle>
+        <Card className="glass-card flex flex-col">
+          <CardHeader className="border-b border-border">
+            <CardTitle className="text-lg font-bold text-foreground">Real-Time Validation Dashboard</CardTitle>
             <CardDescription className="text-xs">Ensures input schemas, ranges, and constraints conform to target requirements.</CardDescription>
           </CardHeader>
           <CardContent className="flex-1 overflow-y-auto max-h-[360px] p-6 space-y-4">
             {!report ? (
-              <div className="h-full flex items-center justify-center text-slate-500 text-xs p-6 text-center">
+              <div className="h-full flex items-center justify-center text-muted-foreground text-xs p-6 text-center">
                 Upload a dataset to run structural validation checks.
               </div>
             ) : (
               <div className="space-y-4">
                 {/* Validation status badge */}
-                <div className="flex items-center justify-between border-b border-white/[0.04] pb-3">
-                  <span className="text-xs text-slate-400 font-medium">Schema Status</span>
-                  <Badge className={report.is_valid ? "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" : "bg-rose-500/10 text-rose-400 border-rose-500/20"}>
+                <div className="flex items-center justify-between border-b border-border pb-3">
+                  <span className="text-xs text-muted-foreground font-medium">Schema Status</span>
+                  <Badge className={report.is_valid ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20" : "bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20"}>
                     {report.is_valid ? "VALID" : "INVALID"}
                   </Badge>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 text-xs">
-                  <div className="p-3 rounded-lg bg-white/[0.01] border border-white/[0.04]">
-                    <span className="text-slate-500 block">Total Intervals</span>
-                    <span className="font-bold text-white font-mono text-sm mt-0.5 block">{report.interval_count}</span>
+                  <div className="p-3 rounded-lg bg-muted/5 border border-border">
+                    <span className="text-muted-foreground block">Total Intervals</span>
+                    <span className="font-bold text-foreground font-mono text-sm mt-0.5 block">{report.interval_count}</span>
                   </div>
-                  <div className="p-3 rounded-lg bg-white/[0.01] border border-white/[0.04]">
-                    <span className="text-slate-500 block">Energy Assets</span>
-                    <span className="font-bold text-white text-sm mt-0.5 block">{report.has_assets ? "CONFIGURED" : "NONE"}</span>
+                  <div className="p-3 rounded-lg bg-muted/5 border border-border">
+                    <span className="text-muted-foreground block">Energy Assets</span>
+                    <span className="font-bold text-foreground text-sm mt-0.5 block">{report.has_assets ? "CONFIGURED" : "NONE"}</span>
                   </div>
                 </div>
 

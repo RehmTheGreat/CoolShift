@@ -27,9 +27,22 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} dark h-full antialiased`}
-      style={{ colorScheme: "dark" }}
+      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{__html: `
+          (function() {
+            const theme = localStorage.getItem('theme') || 'dark';
+            if (theme === 'dark') {
+              document.documentElement.classList.add('dark');
+              document.documentElement.style.colorScheme = 'dark';
+            } else {
+              document.documentElement.classList.remove('dark');
+              document.documentElement.style.colorScheme = 'light';
+            }
+          })()
+        `}} />
+      </head>
       <body className="h-full bg-background text-foreground font-sans noise-overlay">
         <div className="flex h-full overflow-hidden">
           {/* Glassmorphic Sidebar */}

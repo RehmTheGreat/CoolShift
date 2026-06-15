@@ -77,24 +77,24 @@ export default function OptimizePage() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Settings card */}
         <div className="md:col-span-2 space-y-6">
-          <Card className="glass-card border-white/[0.06]">
-            <CardHeader className="border-b border-white/[0.04]">
-              <CardTitle className="text-lg font-bold text-white flex items-center gap-2">
-                <Cpu className="w-5 h-5 text-cyan-400" /> Optimization Parameters
+          <Card className="glass-card">
+            <CardHeader className="border-b border-border">
+              <CardTitle className="text-lg font-bold text-foreground flex items-center gap-2">
+                <Cpu className="w-5 h-5 text-primary" /> Optimization Parameters
               </CardTitle>
               <CardDescription className="text-xs">Adjust weights to guide the multi-objective algorithm tradeoffs.</CardDescription>
             </CardHeader>
             <CardContent className="pt-6 space-y-6 text-sm">
               {/* Select Scenario */}
               <div className="space-y-2">
-                <label className="text-xs text-slate-400 font-medium">Select Target building Scenario</label>
+                <label className="text-xs text-muted-foreground font-medium">Select Target building Scenario</label>
                 {scenarios.length === 0 ? (
-                  <div className="text-xs text-rose-400">No scenarios available. Please import the dataset first.</div>
+                  <div className="text-xs text-rose-500">No scenarios available. Please import the dataset first.</div>
                 ) : (
                   <select
                     value={selectedId}
                     onChange={(e) => setSelectedId(e.target.value)}
-                    className="w-full bg-[#070b16] border border-white/[0.08] rounded-md px-3 py-2 text-slate-300 focus:border-cyan-400"
+                    className="w-full bg-card border border-border rounded-md px-3 py-2 text-foreground focus:border-primary focus:outline-none"
                     disabled={running}
                   >
                     {scenarios.map((s) => (
@@ -107,9 +107,9 @@ export default function OptimizePage() {
               </div>
 
               {/* Slider weights */}
-              <div className="space-y-4 border-t border-white/[0.03] pt-4">
-                <h4 className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-                  <Sliders className="w-4 h-4 text-cyan-400" /> Objective Weights
+              <div className="space-y-4 border-t border-border pt-4">
+                <h4 className="text-xs font-bold text-muted-foreground uppercase tracking-wider flex items-center gap-1.5">
+                  <Sliders className="w-4 h-4 text-primary" /> Objective Weights
                 </h4>
                 
                 {/* Cost Slider */}
@@ -184,16 +184,16 @@ export default function OptimizePage() {
 
         {/* Status panel card */}
         <div className="md:col-span-1">
-          <Card className="glass-card border-white/[0.06] h-full flex flex-col justify-between">
-            <CardHeader className="border-b border-white/[0.04]">
-              <CardTitle className="text-sm font-bold text-slate-300 flex items-center gap-2">
-                <Shield className="w-4.5 h-4.5 text-cyan-400" /> Dispatch Status
+          <Card className="glass-card h-full flex flex-col justify-between">
+            <CardHeader className="border-b border-border">
+              <CardTitle className="text-sm font-bold text-foreground flex items-center gap-2">
+                <Shield className="w-4.5 h-4.5 text-primary" /> Dispatch Status
               </CardTitle>
             </CardHeader>
             <CardContent className="pt-6 flex-grow flex flex-col justify-center items-center p-6 text-center space-y-6">
               {/* Idle state */}
               {!running && !completedRun && (
-                <div className="text-slate-500 text-xs py-8">
+                <div className="text-muted-foreground text-xs py-8">
                   Engine idle. Select a building profile and click Dispatch to initiate calculations.
                 </div>
               )}
@@ -201,9 +201,9 @@ export default function OptimizePage() {
               {/* Running state */}
               {running && (
                 <div className="space-y-4 py-8">
-                  <div className="w-12 h-12 rounded-full border-2 border-cyan-400 border-t-transparent animate-spin mx-auto" />
-                  <p className="text-xs text-slate-400 font-medium animate-pulse">{progressMsg}</p>
-                  <p className="text-[10px] text-slate-500 font-mono">Algorithm v1.0.0 Heuristic</p>
+                  <div className="w-12 h-12 rounded-full border-2 border-primary border-t-transparent animate-spin mx-auto" />
+                  <p className="text-xs text-muted-foreground font-medium animate-pulse">{progressMsg}</p>
+                  <p className="text-[10px] text-muted-foreground font-mono">Algorithm v1.0.0 Heuristic</p>
                 </div>
               )}
 
@@ -211,27 +211,27 @@ export default function OptimizePage() {
               {completedRun && (
                 <div className="space-y-4 py-4 animate-scale-in">
                   <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 mx-auto">
-                    <CheckCircle2 className="w-6 h-6 text-emerald-400" />
+                    <CheckCircle2 className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
                   </div>
                   
                   <div className="space-y-1">
-                    <h4 className="text-sm font-bold text-white">Calculations Complete</h4>
-                    <p className="text-[10px] text-slate-500 font-mono text-cyan-400">{completedRun.run_id}</p>
+                    <h4 className="text-sm font-bold text-foreground">Calculations Complete</h4>
+                    <p className="text-[10px] text-muted-foreground font-mono text-primary">{completedRun.run_id}</p>
                   </div>
 
-                  <div className="border-t border-b border-white/[0.04] py-3 text-xs w-full font-mono text-slate-300 space-y-2">
+                  <div className="border-t border-b border-border py-3 text-xs w-full font-mono text-foreground space-y-2">
                     <div className="flex justify-between">
                       <span>Scenario:</span>
-                      <span className="font-bold text-white">{completedRun.scenario_id}</span>
+                      <span className="font-bold text-foreground">{completedRun.scenario_id}</span>
                     </div>
                     <div className="flex justify-between">
                       <span>Solver Runtime:</span>
-                      <span className="font-bold text-white">{completedRun.runtime_seconds.toFixed(3)}s</span>
+                      <span className="font-bold text-foreground">{completedRun.runtime_seconds.toFixed(3)}s</span>
                     </div>
                   </div>
 
                   <Link href="/results" className="block w-full">
-                    <Button variant="outline" className="w-full border-white/[0.08] hover:bg-white/[0.04] text-xs font-semibold flex items-center justify-center gap-1">
+                    <Button variant="outline" className="w-full border-border hover:bg-muted/50 text-xs font-semibold flex items-center justify-center gap-1">
                       View Results Comparison <ChevronRight className="w-4 h-4" />
                     </Button>
                   </Link>
