@@ -161,7 +161,6 @@ export interface ValidationReport {
 }
 
 export interface OptimizationRunMeta {
-  id: number;
   run_id: string;
   scenario_id: string;
   algorithm_version: string;

@@ -41,7 +41,6 @@ def list_optimization_runs(db: Session = Depends(get_db)):
     result = []
     for r in runs:
         result.append({
-            "id": r.id,
             "run_id": r.run_id,
             "scenario_id": r.scenario_id,
             "algorithm_version": r.algorithm_version,
