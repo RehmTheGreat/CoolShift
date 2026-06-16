@@ -13,7 +13,10 @@ return new class extends Migration
     {
         Schema::create('output_summaries', function (Blueprint $table) {
             $table->id();
+            // $table->string('scenario_id');
             $table->string('scenario_id');
+            // $table->foreignId('scenario_id')->constrained()->onDelete('cascade');
+
             $table->string('run_id');
             $table->dateTime('period_start');
             $table->dateTime('period_end');
@@ -39,8 +42,10 @@ return new class extends Migration
             $table->integer('runtime_seconds')->nullable();
             $table->string('algorithm_version')->nullable();
             $table->timestamps();
-            $table->foreignId('scenario_id')->constrained()->onDelete('cascade');
-            // $table->foreignId('scenario_id')->constrained()->onDelete('cascade');
+            $table->foreign('scenario_id')
+                ->references('scenario_id')
+                ->on('scenarios')
+                ->onDelete('cascade');
         });
     }
 

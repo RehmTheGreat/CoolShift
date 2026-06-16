@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('scenarios', function (Blueprint $table) {
             $table->string('scenario_id')->primary(); // PK: jaise PUB-A, PUB-B
             $table->string('name');
-            $table->string('timezone');
+            $table->string('timezone')->nullable();
             $table->string('building_type');
             $table->integer('area_m2');
             $table->integer('room_count');
