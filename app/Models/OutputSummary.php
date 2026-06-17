@@ -13,4 +13,6 @@ class OutputSummary extends Model
     public function scenario() {
         return $this->belongsTo(Scenario::class, 'scenario_id', 'scenario_id');
     }
+
+    
 }

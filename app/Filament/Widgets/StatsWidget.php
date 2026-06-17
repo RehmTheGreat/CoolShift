@@ -11,14 +11,18 @@ class StatsWidget extends StatsOverviewWidget
     {
         return [
             //
-            Stat::make("Total Senarios", 4)
+            Stat::make("Total Cost Savings", 4)
                 ->description('32% increase')
                 ->descriptionIcon('heroicon-m-arrow-trending-up')
                 ->color('success'),
-            Stat::make("Total Electricity Cost Saved", 4),
-            Stat::make("Total Carbon Emissions Reduced", 4),
-            // Stat::make("Average Solar Utilization Rate", 4)
+            Stat::make("Carbon Offset", 4),
+            Stat::make("Avg. Comfort Compliance", 4),
+            Stat::make("Peak Load Reduction", 4)
 
+//             Total Cost Savings	Sum(baseline_cost - optimized_cost)
+// Environmental	Carbon Offset	Sum(baseline_emissions - optimized_emissions)
+// Performance	Avg. Comfort Compliance	Average(comfort_compliance_pct)
+// Efficiency	Peak Load Reduction	Sum(baseline_peak_kw - optimized_peak_kw)
         ];
     }
 }
